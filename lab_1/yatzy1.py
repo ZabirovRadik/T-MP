@@ -15,7 +15,7 @@ def parse_dice_and_category(input_str):
 
 def _validate_category(category_str):
     if not category_str.strip() in CATEGORIES.keys():
-        raise ValueError("Unknown category: {}".format(category_str))
+        raise ValueError(f"Unknown category: {category_str}")
     return category_str
 
 
@@ -26,10 +26,10 @@ def valid_categories():
 def parse_dice(dice_str):
     dice = [int(d) for d in dice_str.strip().split(',')]
     if len(dice) != 5:
-        raise ValueError("Wrong number of dice. Expected 5, got {}".format(len(dice)))
+        raise ValueError(f"Wrong number of dice. Expected 5, got {dice}")
     outside_range = filter(lambda x: x < 1 or x > 6, dice)
     if len(outside_range) > 0:
-        raise ValueError("Illegal dice values: {}".format(outside_range))
+        raise ValueError(f"Illegal dice values: {outside_range}")
     return dice
 
 
@@ -153,14 +153,14 @@ if __name__ == "__main__":
     category = None
     if len(sys.argv) > 1:
         if "--help" in sys.argv:
-            print("""\
+            print(f"""\
 Yatzy calculator program. Usage:
 
     yatzy.py <category>
 
 where <category> is the category to score. This should be one of:
 
-{}
+{sorted(CATEGORIES.keys())}
 
 You should pass dice rolls to standard input, formatted as one roll of five dice per line of input:
 
@@ -168,11 +168,11 @@ You should pass dice rolls to standard input, formatted as one roll of five dice
 1,2,2,3,3
 
 
-            """.format(sorted(CATEGORIES.keys())))
+            """)
             sys.exit(0)
         category = sys.argv[1]
     if not category in CATEGORIES.keys():
-        print("unknown category: {}".format(category))
+        print(f"unknown category: {category}")
         sys.exit(-1)
 
     for dice_input in sys.stdin.readlines():
@@ -181,6 +181,6 @@ You should pass dice rolls to standard input, formatted as one roll of five dice
             dice = parse_dice(dice_str)
             points = score(dice, category)
         except ValueError as e:
-            sys.stderr.write("ERROR in input '{}': {}\n".format(dice_str, e))
+            sys.stderr.write(f"ERROR in input '{dice_str}': {e}\n")
             points = "BAD_INPUT"
-        print("""[{}] "{}": {}""".format(dice_str, category, points))
+        print(f"""[{dice_str}] "{category}": {points}""")

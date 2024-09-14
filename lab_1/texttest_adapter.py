@@ -16,7 +16,7 @@ import sys
 
 def main(valid_categories, parse_dice_and_category, score):
     if "--help" in sys.argv or '-h' in sys.argv:
-        print("""\
+        print(f"""\
 Yatzy calculator program.
 
 You should pass dice rolls to standard input, formatted as one roll of five dice followed by the category to score:
@@ -26,11 +26,11 @@ You should pass dice rolls to standard input, formatted as one roll of five dice
 
 where <category> should be one of:
 
-{}
+{valid_categories()}
 
 This program will then print the calculated score to standard output, and any error messages to standard error.
 
-        """.format(valid_categories()))
+        """)
         sys.exit(0)
         
     for yatzy_input in sys.stdin.readlines():
@@ -40,6 +40,6 @@ This program will then print the calculated score to standard output, and any er
             dice, category = parse_dice_and_category(dice_and_category_str)
             points = score(dice, category)
         except ValueError as e:
-            sys.stderr.write("ERROR in input '{}': {}\n".format(dice_and_category_str, e))
+            sys.stderr.write(f"ERROR in input '{dice_and_category_str}': {e}\n")
             points = "BAD_INPUT"
-        print("""[{}] {}""".format(dice_and_category_str, points))
+        print(f"""[{dice_and_category_str}] {points}""")
