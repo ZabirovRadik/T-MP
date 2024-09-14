@@ -5,11 +5,14 @@ def parse_dice_and_category(input_str):
     dice, category = input_str.split()
     return parse_dice(dice), category
 
+
 def parse_dice(dice_str):
     return [int(d) for d in dice_str.split(',')]
 
+
 def valid_categories():
     return CATEGORIES.keys()
+
 
 class Yatzy:
 
@@ -49,7 +52,6 @@ class Yatzy:
 
         return sum
 
-
     @staticmethod
     def twos( d1,  d2,  d3,  d4,  d5):
         sum = 0
@@ -80,7 +82,6 @@ class Yatzy:
              s += 3
         return s
 
-
     def __init__(self, d1, d2, d3, d4, _5):
         self.dice = [0]*5
         self.dice[0] = d1
@@ -96,7 +97,6 @@ class Yatzy:
                 sum += 4
         return sum
 
-
     def fives(self):
         s = 0
         i = 0
@@ -104,7 +104,6 @@ class Yatzy:
             if (self.dice[i] == 5):
                 s = s + 5
         return s
-
 
     def sixes(self):
         sum = 0
@@ -160,7 +159,6 @@ class Yatzy:
                 return (i+1) * 4
         return 0
 
-
     @staticmethod
     def three_of_a_kind( d1,  d2,  d3,  d4,  d5):
         t = [0]*6
@@ -173,7 +171,6 @@ class Yatzy:
             if (t[i] == 3):
                 return (i+1) * 3
         return 0
-
 
     @staticmethod
     def smallStraight( d1,  d2,  d3,  d4,  d5):
@@ -191,7 +188,6 @@ class Yatzy:
             return 15
         return 0
 
-
     @staticmethod
     def largeStraight( d1,  d2,  d3,  d4,  d5):
         tallies = [0]*6
@@ -207,7 +203,6 @@ class Yatzy:
             and tallies[5] == 1):
             return 15
         return 0
-
 
     @staticmethod
     def fullHouse( d1,  d2,  d3,  d4,  d5):
@@ -231,17 +226,16 @@ class Yatzy:
                 _3 = True
                 _2_at = i+1
 
-
         for i in range(6):
             if (tallies[i] == 3):
                 _3 = True
                 _3_at = i+1
 
-
         if (_2 and _3):
             return _2_at * 2 + _3_at * 3
         else:
             return 0
+
 
 CATEGORIES = {"chance": Yatzy.chance,
               "yatzy": Yatzy.yatzy,
@@ -250,13 +244,7 @@ CATEGORIES = {"chance": Yatzy.chance,
               "smallstraight": Yatzy.smallStraight, "largestraight": Yatzy.largeStraight,
               "twopairs": Yatzy.two_pair, "fullhouse": Yatzy.fullHouse}
 
+
 def score(dice, category):
     score_function = CATEGORIES[category]
     return score_function(*dice)
-
-
-
-
-
-
-    
