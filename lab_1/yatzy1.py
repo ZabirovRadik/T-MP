@@ -127,12 +127,12 @@ def large_straight(dice: list[int]) -> int:
 
 def two_pairs(dice: list[int]) -> int:
     frequencies = _frequencies(dice)
-    score = 0
+    sum = 0
     if len(filter(lambda x: x >=2, frequencies.values())) == 2:
-        for i in [6,5,4,3,2,1]:
+        for i in [6, 5, 4, 3, 2, 1]:
             if frequencies[i] >= 2:
-                score += i*2
-    return score
+                sum += i*2
+    return sum
 
 
 def full_house(dice: list[int]) -> int:

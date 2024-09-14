@@ -38,33 +38,33 @@ class Yatzy:
 
     @staticmethod
     def ones(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
-        sum = 0
+        summ = 0
         if (d1 == 1):
-            sum += 1
+            summ += 1
         if (d2 == 1):
-            sum += 1
+            summ += 1
         if (d3 == 1):
-            sum += 1
+            summ += 1
         if (d4 == 1):
-            sum += 1
+            summ += 1
         if (d5 == 1):
-            sum += 1
-        return sum
+            summ += 1
+        return summ
 
     @staticmethod
     def twos(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
-        sum = 0
+        summ = 0
         if (d1 == 2):
-             sum += 2
+             summ += 2
         if (d2 == 2):
-             sum += 2
+             summ += 2
         if (d3 == 2):
-             sum += 2
+             summ += 2
         if (d4 == 2):
-             sum += 2
+             summ += 2
         if (d5 == 2):
-             sum += 3
-        return sum
+             summ += 3
+        return summ
 
     @staticmethod
     def threes(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
@@ -90,11 +90,11 @@ class Yatzy:
         self.dice[4] = d5
 
     def fours(self) -> int:
-        sum = 0
+        summ = 0
         for at in range(5):
             if (self.dice[at] == 4):
-                sum += 4
-        return sum
+                summ += 4
+        return summ
 
     def fives(self) -> int:
         s = 0
@@ -105,11 +105,11 @@ class Yatzy:
         return s
 
     def sixes(self) -> int:
-        sum = 0
+        summ = 0
         for at in range(len(self.dice)):
             if (self.dice[at] == 6):
-                sum = sum + 6
-        return sum
+                summ = summ + 6
+        return summ
 
     @staticmethod
     def score_pair(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
