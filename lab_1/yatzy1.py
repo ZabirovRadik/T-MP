@@ -10,7 +10,6 @@ def parse_dice_and_category(input_str):
         dice, category = input_str.split()
     except ValueError as e:
         raise ValueError("Input should contain a space separating dice and category")
-
     return parse_dice(dice), _validate_category(category)
 
 

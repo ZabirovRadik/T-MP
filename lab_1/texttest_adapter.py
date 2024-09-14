@@ -13,6 +13,7 @@ It can alternatively print out help text if '--help' is included in the command 
 """
 import sys
 
+
 def main(valid_categories, parse_dice_and_category, score):
     if "--help" in sys.argv or '-h' in sys.argv:
         print("""\

@@ -49,7 +49,6 @@ class Yatzy:
             sum += 1
         if (d5 == 1):
             sum += 1
-
         return sum
 
     @staticmethod
@@ -140,7 +139,6 @@ class Yatzy:
             if (counts[6-i-1] == 2):
                 n = n+1
                 score += (6-i)
-
         if (n == 2):
             return score * 2
         else:
@@ -212,25 +210,21 @@ class Yatzy:
         _2_at = 0
         _3 = False
         _3_at = 0
-
         tallies = [0]*6
         tallies[d1-1] += 1
         tallies[d2-1] += 1
         tallies[d3-1] += 1
         tallies[d4-1] += 1
         tallies[d5-1] += 1
-
         for i in range(6):
             if (tallies[i] == 2):
                 _2 = True
                 _3 = True
                 _2_at = i+1
-
         for i in range(6):
             if (tallies[i] == 3):
                 _3 = True
                 _3_at = i+1
-
         if (_2 and _3):
             return _2_at * 2 + _3_at * 3
         else:
