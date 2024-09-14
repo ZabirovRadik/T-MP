@@ -6,5 +6,5 @@ import texttest_adapter
 
 
 if __name__ == "__main__":
-	texttest_adapter.main(valid_categories, parse_dice_and_category, score)
+    texttest_adapter.main(valid_categories, parse_dice_and_category, score)
 	
