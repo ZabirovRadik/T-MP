@@ -5,7 +5,7 @@ import sys
 from collections import defaultdict
 
 
-def parse_dice_and_category(input_str):
+def parse_dice_and_category(input_str: str)-> tuple[list[int], str]:
     try:
         dice, category = input_str.split()
     except ValueError as e:
@@ -14,17 +14,17 @@ def parse_dice_and_category(input_str):
     return parse_dice(dice), _validate_category(category)
 
 
-def _validate_category(category_str):
+def _validate_category(category_str: str) -> str:
     if not category_str.strip() in CATEGORIES.keys():
         raise ValueError(f"Unknown category: {category_str}")
     return category_str
 
 
-def valid_categories():
+def valid_categories() -> list[str]:
     return sorted(CATEGORIES.keys())
 
 
-def parse_dice(dice_str):
+def parse_dice(dice_str: str) -> list[int]:
     dice = [int(d) for d in dice_str.strip().split(',')]
     if len(dice) != 5:
         raise ValueError(f"Wrong number of dice. Expected 5, got {dice}")
@@ -34,58 +34,58 @@ def parse_dice(dice_str):
     return dice
 
 
-def score(dice, category):
+def score(dice: list[int], category: str | None) -> int:
     score_function = CATEGORIES[category]
     return score_function(dice)
 
 
-def _frequencies(dice):
+def _frequencies(dice: list[int]) -> dict:
     frequencies = defaultdict(int)
     for die in dice:
         frequencies[die] += 1
     return frequencies
 
 
-def chance(dice):
+def chance(dice: list[int]) -> int:
     return sum(dice)
 
 
-def yatzy(dice):
+def yatzy(dice: list[int]) -> int:
     if 5 in _frequencies(dice).values():
         return 50
     else:
         return 0
 
 
-def _number_frequency(dice, number):
+def _number_frequency(dice: list[int], number):
     return _frequencies(dice)[number]*number
 
 
-def ones(dice):
+def ones(dice: list[int]) -> int:
     return _number_frequency(dice, 1)
 
 
-def twos(dice):
+def twos(dice: list[int]) -> int:
     return _number_frequency(dice, 2)
 
 
-def threes(dice):
+def threes(dice: list[int]) -> int:
     return _number_frequency(dice, 3)
 
 
-def fours(dice):
+def fours(dice: list[int]) -> int:
     return _number_frequency(dice, 4)
 
 
-def fives(dice):
+def fives(dice: list[int]) -> int:
     return _number_frequency(dice, 5)
 
 
-def sixes(dice):
+def sixes(dice: list[int]) -> int:
     return _number_frequency(dice, 6)
 
 
-def _n_of_a_kind(dice, n):
+def _n_of_a_kind(dice: list[int], n: int) -> int:
     frequencies = _frequencies(dice)
     for i in [6,5,4,3,2,1]:
         if frequencies[i] >= n:
@@ -93,23 +93,23 @@ def _n_of_a_kind(dice, n):
     return 0
 
 
-def pair(dice):
+def pair(dice: list[int]) -> int:
     return _n_of_a_kind(dice, 2)
 
 
-def three_of_a_kind(dice):
+def three_of_a_kind(dice: list[int]) -> int:
     return _n_of_a_kind(dice, 3)
 
 
-def four_of_a_kind(dice):
+def four_of_a_kind(dice: list[int]) -> int:
     return _n_of_a_kind(dice, 4)
 
 
-def _is_straight(frequencies):
+def _is_straight(frequencies: list[int]) -> bool:
     return len(filter(lambda x: x == 1, frequencies.values())) == 5
 
 
-def small_straight(dice):
+def small_straight(dice: list[int]) -> int:
     frequencies = _frequencies(dice)
     if _is_straight(frequencies) and frequencies[6] == 0:
         return sum(dice)
@@ -117,7 +117,7 @@ def small_straight(dice):
         return 0
 
 
-def large_straight(dice):
+def large_straight(dice: list[int]) -> int:
     frequencies = _frequencies(dice)
     if _is_straight(frequencies) and frequencies[1] == 0:
         return sum(dice)
@@ -125,7 +125,7 @@ def large_straight(dice):
         return 0
 
 
-def two_pairs(dice):
+def two_pairs(dice: list[int]) -> int:
     frequencies = _frequencies(dice)
     score = 0
     if len(filter(lambda x: x >=2, frequencies.values())) == 2:
@@ -135,7 +135,7 @@ def two_pairs(dice):
     return score
 
 
-def full_house(dice):
+def full_house(dice: list[int]) -> int:
     frequencies = _frequencies(dice)
     if 3 in frequencies.values() and 2 in frequencies.values():
         return sum(dice)

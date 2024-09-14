@@ -1,23 +1,23 @@
 #!/usr/bin/env python3
 
 
-def parse_dice_and_category(input_str):
+def parse_dice_and_category(input_str: str) -> tuple[list[int], str]:
     dice, category = input_str.split()
     return parse_dice(dice), category
 
 
-def parse_dice(dice_str):
+def parse_dice(dice_str: str) -> list[int]:
     return [int(d) for d in dice_str.split(',')]
 
 
-def valid_categories():
+def valid_categories() -> dict: 
     return CATEGORIES.keys()
 
 
 class Yatzy:
 
     @staticmethod
-    def chance(d1, d2, d3, d4, d5):
+    def chance(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         total = 0
         total += d1
         total += d2
@@ -27,7 +27,7 @@ class Yatzy:
         return total
 
     @staticmethod
-    def yatzy(dice):
+    def yatzy(dice) -> int:
         counts = [0]*(len(dice)+1)
         for die in dice:
             counts[die-1] += 1
@@ -37,7 +37,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def ones( d1,  d2,  d3,  d4,  d5):
+    def ones(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         sum = 0
         if (d1 == 1):
             sum += 1
@@ -52,7 +52,7 @@ class Yatzy:
         return sum
 
     @staticmethod
-    def twos( d1,  d2,  d3,  d4,  d5):
+    def twos(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         sum = 0
         if (d1 == 2):
              sum += 2
@@ -67,7 +67,7 @@ class Yatzy:
         return sum
 
     @staticmethod
-    def threes( d1,  d2,  d3,  d4,  d5):
+    def threes(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         s = 0
         if (d1 == 3):
              s += 3
@@ -81,22 +81,22 @@ class Yatzy:
              s += 3
         return s
 
-    def __init__(self, d1, d2, d3, d4, _5):
+    def __init__(self, d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         self.dice = [0]*5
         self.dice[0] = d1
         self.dice[1] = d2
         self.dice[2] = d3
         self.dice[3] = d4
-        self.dice[4] = _5
+        self.dice[4] = d5
 
-    def fours(self):
+    def fours(self) -> int:
         sum = 0
         for at in range(5):
             if (self.dice[at] == 4):
                 sum += 4
         return sum
 
-    def fives(self):
+    def fives(self) -> int:
         s = 0
         i = 0
         for i in range(len(self.dice)):
@@ -104,7 +104,7 @@ class Yatzy:
                 s = s + 5
         return s
 
-    def sixes(self):
+    def sixes(self) -> int:
         sum = 0
         for at in range(len(self.dice)):
             if (self.dice[at] == 6):
@@ -112,7 +112,7 @@ class Yatzy:
         return sum
 
     @staticmethod
-    def score_pair( d1,  d2,  d3,  d4,  d5):
+    def score_pair(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         counts = [0]*6
         counts[d1-1] += 1
         counts[d2-1] += 1
@@ -126,7 +126,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def two_pair( d1,  d2,  d3,  d4,  d5):
+    def two_pair(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         counts = [0]*6
         counts[d1-1] += 1
         counts[d2-1] += 1
@@ -145,10 +145,10 @@ class Yatzy:
             return 0
 
     @staticmethod
-    def four_of_a_kind( _1,  _2,  d3,  d4,  d5):
+    def four_of_a_kind(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         tallies = [0]*6
-        tallies[_1-1] += 1
-        tallies[_2-1] += 1
+        tallies[d1-1] += 1
+        tallies[d2-1] += 1
         tallies[d3-1] += 1
         tallies[d4-1] += 1
         tallies[d5-1] += 1
@@ -158,7 +158,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def three_of_a_kind( d1,  d2,  d3,  d4,  d5):
+    def three_of_a_kind(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         t = [0]*6
         t[d1-1] += 1
         t[d2-1] += 1
@@ -171,7 +171,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def smallStraight( d1,  d2,  d3,  d4,  d5):
+    def smallStraight(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         tallies = [0]*6
         tallies[d1-1] += 1
         tallies[d2-1] += 1
@@ -187,7 +187,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def largeStraight( d1,  d2,  d3,  d4,  d5):
+    def largeStraight(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         tallies = [0]*6
         tallies[d1-1] += 1
         tallies[d2-1] += 1
@@ -203,7 +203,7 @@ class Yatzy:
         return 0
 
     @staticmethod
-    def fullHouse( d1,  d2,  d3,  d4,  d5):
+    def fullHouse(d1: int, d2: int, d3: int, d4: int, d5: int) -> int:
         tallies = []
         _2 = False
         i = 0
@@ -248,6 +248,6 @@ CATEGORIES = {"chance": Yatzy.chance,
               "fullhouse": Yatzy.fullHouse}
 
 
-def score(dice, category):
+def score(dice: list[int], category: str) -> int:
     score_function = CATEGORIES[category]
     return score_function(*dice)
