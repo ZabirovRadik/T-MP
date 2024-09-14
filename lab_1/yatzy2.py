@@ -217,15 +217,15 @@ class Yatzy:
         tallies[d4-1] += 1
         tallies[d5-1] += 1
         for i in range(6):
-            if (tallies[i] == 2):
+            if tallies[i] == 2:
                 _2 = True
                 _3 = True
                 _2_at = i+1
         for i in range(6):
-            if (tallies[i] == 3):
+            if tallies[i] == 3:
                 _3 = True
                 _3_at = i+1
-        if (_2 and _3):
+        if _2 and _3:
             return _2_at * 2 + _3_at * 3
         else:
             return 0
@@ -233,10 +233,19 @@ class Yatzy:
 
 CATEGORIES = {"chance": Yatzy.chance,
               "yatzy": Yatzy.yatzy,
-              "ones": Yatzy.ones, "twos": Yatzy.twos, "threes": Yatzy.threes, "fours": Yatzy.fours, "fives": Yatzy.fives, "sixes": Yatzy.sixes,
-              "pair": Yatzy.score_pair, "threeofakind": Yatzy.three_of_a_kind, "fourofakind": Yatzy.four_of_a_kind,
-              "smallstraight": Yatzy.smallStraight, "largestraight": Yatzy.largeStraight,
-              "twopairs": Yatzy.two_pair, "fullhouse": Yatzy.fullHouse}
+              "ones": Yatzy.ones,
+              "twos": Yatzy.twos,
+              "threes": Yatzy.threes,
+              "fours": Yatzy.fours,
+              "fives": Yatzy.fives,
+              "sixes": Yatzy.sixes,
+              "pair": Yatzy.score_pair,
+              "threeofakind": Yatzy.three_of_a_kind,
+              "fourofakind": Yatzy.four_of_a_kind,
+              "smallstraight": Yatzy.smallStraight,
+              "largestraight": Yatzy.largeStraight,
+              "twopairs": Yatzy.two_pair,
+              "fullhouse": Yatzy.fullHouse}
 
 
 def score(dice, category):

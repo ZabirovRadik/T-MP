@@ -9,7 +9,8 @@ def parse_dice_and_category(input_str):
     try:
         dice, category = input_str.split()
     except ValueError as e:
-        raise ValueError("Input should contain a space separating dice and category")
+        raise ValueError("Input should contain a space\
+                          separating dice and category")
     return parse_dice(dice), _validate_category(category)
 
 
@@ -143,10 +144,12 @@ def full_house(dice):
 
 CATEGORIES = {"chance": chance,
               "yatzy": yatzy,
-              "ones": ones, "twos": twos, "threes": threes, "fours": fours, "fives": fives, "sixes": sixes,
+              "ones": ones, "twos": twos, "threes": threes,
+              "fours": fours, "fives": fives, "sixes": sixes,
               "pair": pair, "threeofakind": three_of_a_kind, "fourofakind": four_of_a_kind,
               "smallstraight": small_straight, "largestraight": large_straight,
-              "twopairs": two_pairs, "fullhouse": full_house}
+              "twopairs": two_pairs, "fullhouse": full_house
+              }
 
 
 if __name__ == "__main__":
@@ -154,21 +157,16 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         if "--help" in sys.argv:
             print(f"""\
-Yatzy calculator program. Usage:
-
-    yatzy.py <category>
-
-where <category> is the category to score. This should be one of:
-
-{sorted(CATEGORIES.keys())}
-
-You should pass dice rolls to standard input, formatted as one roll of five dice per line of input:
-
-1,2,3,4,5
-1,2,2,3,3
-
-
-            """)
+                  Yatzy calculator program. Usage:\n\
+                  yatzy.py <category>\n\
+                  where <category> is the category to score.\
+                  This should be one of:\n\
+                  {sorted(CATEGORIES.keys())}\n\
+                    You should pass dice rolls to standard input, \
+                        formatted as one roll of five dice per line of input:\n\
+                        1,2,3,4,5\n\
+                            1,2,2,3,3
+                            """)
             sys.exit(0)
         category = sys.argv[1]
     if not category in CATEGORIES.keys():

@@ -238,11 +238,19 @@ class Yatzy:
 
 CATEGORIES = {"chance": Yatzy.chance,
               "yatzy": Yatzy.yatzy,
-              "ones": Yatzy.ones, "twos": Yatzy.twos, "threes": Yatzy.threes,
-              "fours": Yatzy.calculate_fours, "fives": Yatzy.calculate_fives, "sixes": Yatzy.calculate_sixes,
-              "pair": Yatzy.score_pair, "threeofakind": Yatzy.three_of_a_kind, "fourofakind": Yatzy.four_of_a_kind,
-              "smallstraight": Yatzy.smallStraight, "largestraight": Yatzy.largeStraight,
-              "twopairs": Yatzy.two_pair, "fullhouse": Yatzy.fullHouse}
+              "ones": Yatzy.ones,
+              "twos": Yatzy.twos,
+              "threes": Yatzy.threes,
+              "fours": Yatzy.calculate_fours,
+              "fives": Yatzy.calculate_fives,
+              "sixes": Yatzy.calculate_sixes,
+              "pair": Yatzy.score_pair,
+              "threeofakind": Yatzy.three_of_a_kind,
+              "fourofakind": Yatzy.four_of_a_kind,
+              "smallstraight": Yatzy.smallStraight,
+              "largestraight": Yatzy.largeStraight,
+              "twopairs": Yatzy.two_pair,
+              "fullhouse": Yatzy.fullHouse}
 
 
 def score(dice, category):
