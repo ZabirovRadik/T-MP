@@ -146,8 +146,10 @@ CATEGORIES = {"chance": chance,
               "yatzy": yatzy,
               "ones": ones, "twos": twos, "threes": threes,
               "fours": fours, "fives": fives, "sixes": sixes,
-              "pair": pair, "threeofakind": three_of_a_kind, "fourofakind": four_of_a_kind,
-              "smallstraight": small_straight, "largestraight": large_straight,
+              "pair": pair, "threeofakind": three_of_a_kind,
+              "fourofakind": four_of_a_kind,
+              "smallstraight": small_straight,
+              "largestraight": large_straight,
               "twopairs": two_pairs, "fullhouse": full_house
               }
 
