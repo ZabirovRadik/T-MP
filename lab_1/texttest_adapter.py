@@ -19,7 +19,8 @@ def main(valid_categories, parse_dice_and_category, score):
         print(f"""\
 Yatzy calculator program.
 
-You should pass dice rolls to standard input, formatted as one roll of five dice followed by the category to score:
+You should pass dice rolls to standard input, \
+formatted as one roll of five dice followed by the category to score:
 
 1,2,3,4,5 <category>
 1,2,2,3,3 <category>
@@ -28,7 +29,9 @@ where <category> should be one of:
 
 {valid_categories()}
 
-This program will then print the calculated score to standard output, and any error messages to standard error.
+This program will then print the calculated score \
+to standard output, \
+and any error messages to standard error.
 
         """)
         sys.exit(0)
