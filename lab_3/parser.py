@@ -1,7 +1,7 @@
 import re
-from auxiliary import write_csv
 import requests
 
+from auxiliary import write_csv
 
 
 def quotes_parser(csv_file:str = "ria news",
