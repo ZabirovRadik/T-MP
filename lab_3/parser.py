@@ -1,6 +1,8 @@
 import re
 import requests
 
+from fake_headers import Headers
+
 from auxiliary import write_csv
 
 
@@ -29,13 +31,16 @@ def quotes_parser(csv_file:str = "ria news",
     Return:
         None
     """
-    headers = {"User-Agent": "Mozilla/5.0"}
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers= Headers(
+                                                browser = "Chrome",
+                                                os = "win",
+                                                headers = True
+                                                ).generate())
     html_content = response.text
     data = []
     pattern = re.compile(
-        r'class="list-item__title [\w-]+?">(.*?) </a>' #Заголовок статьи
+        r'class="list-item__title [\w-]+?">"{0,1}(.*?) (?:"|</a>|<span)' #Заголовок статьи
         r'.+?data-type="date">([\d:]{4,5})'            #Время публикации
         r'.+?(\d+)</span>',                            #Число просмотров
         re.DOTALL
