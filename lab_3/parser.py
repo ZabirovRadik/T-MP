@@ -12,6 +12,23 @@ def quotes_parser(csv_file:str = "ria news",
                                    'Просмотры',
                                    'Тэги']
                   ) -> None:
+    """
+    Парсит сайт ria.ru/world или другой сайт с похожим html кодом
+    и записывает результат в csv файл
+
+    Args:
+        csv_file:str
+            Название для файла с данными
+        folder:str
+            Папка для данных
+        url: str
+            URL сайта для парсинга
+        headlines:str
+            Названия столбцов данных в csv файле
+    
+    Return:
+        None
+    """
     headers = {"User-Agent": "Mozilla/5.0"}
 
     response = requests.get(url, headers=headers)
