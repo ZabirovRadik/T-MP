@@ -328,6 +328,7 @@ def main():
     def button_press(a):
         reload_button['image']=reload_button_img2
         snake.reload()
+        logging.info("Reloaded!")
 
     def button_unpress(a):
         reload_button['image']=reload_button_img1
