@@ -6,15 +6,35 @@
  https://github.com/ivangolubykh/python-snake
 '''
 
-
-from tkinter import *
-from enum import Enum
+import logging
+import os
+import sys
 import time
 import random
+
+from enum import Enum
+
+from tkinter import *
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler(os.path.join("lab_4","game.log")),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+
 
 class python_snake: # Двигать тело змеюки в текущую сторону на 1 шаг
 # При этом тело может увеличиться (add='add') в размерах или нет
     def __init__(self, window, canv_x, canv_y, canv_width, canv_height):
+        self._left = 0
+        self._right = 0
+        self._up = 0
+        self._down = 0
+        self._eaten = 0
+        self._starts = 0
         self.__started = 1
         self.__spped = 10
         self.__window = window
@@ -51,7 +71,11 @@ class python_snake: # Двигать тело змеюки в текущую с�
         self.__window.bind('<KP_Add>',self.speed_key) # Клавиша + на боковой клаве
         self.__window.bind('<KP_Subtract>',self.speed_key) # Клавиша - на боковой клаве
         # self.__window.bind('<KeyPress>',self.speed_key) # print(event.keysym) Вычислит нажатую клавишу
+        logging.info("The snake is initialized")
         
+
+    def starts(self):
+        return self._starts
 
     class CONST(Enum): # Список возможных направлений движения и других констант
         RIGHT = 1
@@ -73,12 +97,16 @@ class python_snake: # Двигать тело змеюки в текущую с�
     # обработчики клавиш изменения направления движения:
     def right(self, event):
         self.__vector = self.CONST.RIGHT.value
+        self._right += 1
     def down(self, event):
         self.__vector = self.CONST.DOWN.value
+        self._down += 1
     def left(self, event):
         self.__vector = self.CONST.LEFT.value
+        self._left += 1
     def up(self, event):
         self.__vector = self.CONST.UP.value
+        self._up += 1
 
     def speed_key(self, event):
         # print(event.keysym)
@@ -144,11 +172,14 @@ class python_snake: # Двигать тело змеюки в текущую с�
                 if self.food.eat(self) == 1:
                     add = 'add'
                     self.speed('+')
+                    self._eaten += 1
                 elif add == 'add':
                     add = 'del'
                 if self.bump_wall() == 'the end':
+                    logging.info("Hit the wall!")
                     break
                 if self.bump_body() == 'the end':
+                    logging.info("Bit yourself!")
                     break
                 for x in range(1, (self.__spped + 1) ):
                     time.sleep(0.05)
@@ -156,6 +187,16 @@ class python_snake: # Двигать тело змеюки в текущую с�
                     if self.quit == 'y':
                         i = 1
                         break
+        logging.info(f"The snake turned left {self._left} times, \
+right {self._right} times, \
+up {self._up} times, down {self._down} times; {self._eaten} food eaten!")
+        self._left = 0
+        self._right = 0
+        self._up = 0
+        self._down = 0
+        self._eaten = 0
+        self._starts += 1
+
 
     def bump_wall(self): # Проверка на столкновение со стеной
         __head_x = self.body[-1]['x']
@@ -315,8 +356,10 @@ def main():
     snake.start()
 
     root.mainloop()
+    return snake.starts() - 1
 
 
 
 if __name__ == '__main__':
-    main()
+    logging.info("The program is running")
+    logging.info(f"The program finished after {main()} restarts!")
