@@ -180,7 +180,15 @@ move_down = False
 can_move = True
 
 tetris = Tetris(ROWS, COLS)
-		
+logging.info("Game started")
+
+restarts = 0
+spaces = 0
+pauses = 0
+moves = [0,0,0,0]
+
+
+log_key = True
 running = True
 while running:
 	win.fill(BLACK)
@@ -202,24 +210,32 @@ while running:
 		if event.type == pygame.KEYDOWN:
 			if can_move and not tetris.gameover:
 				if event.key == pygame.K_LEFT:
+					moves[0] += 1
 					tetris.go_side(-1)
 
 				if event.key == pygame.K_RIGHT:
+					moves[1] += 1
 					tetris.go_side(1)
 
 				if event.key == pygame.K_UP:
+					moves[2] += 1
 					tetris.rotate()
 
 				if event.key == pygame.K_DOWN:
+					moves[3] += 1
 					move_down = True
 
 				if event.key == pygame.K_SPACE:
+					spaces += 1
 					tetris.go_space()
 
 			if event.key == pygame.K_r:
+				restarts += 1
+				log_key = True
 				tetris.__init__(ROWS, COLS)
 
 			if event.key == pygame.K_p:
+				pauses += 1
 				can_move = not can_move
 
 			if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
@@ -263,8 +279,16 @@ while running:
 		win.blit(over, (rect.centerx-over.get_width()/2, rect.y + 20))
 		win.blit(msg1, (rect.centerx-msg1.get_width()/2, rect.y + 80))
 		win.blit(msg2, (rect.centerx-msg2.get_width()/2, rect.y + 110))
-
-	# HUD ********************************************************************
+		if log_key:
+			logging.info(f"Moves: {moves[0]} left, {moves[1]} right, \
+{moves[2]} up, {moves[3]} down")
+			logging.info(f"{spaces} spaces and {pauses} pauses!")
+			spaces = 0
+			pauses = 0
+			moves = [0]*4
+			log_key = False
+		
+		# HUD ********************************************************************
 
 	pygame.draw.rect(win, BLUE, (0, HEIGHT-120, WIDTH, 120))
 	if tetris.next:
@@ -285,3 +309,5 @@ while running:
 	clock.tick(FPS)
 	pygame.display.update()
 pygame.quit()
+logging.info(f"{restarts} restarts")
+logging.info("Game finished")
