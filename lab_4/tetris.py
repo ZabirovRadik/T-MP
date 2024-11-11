@@ -185,7 +185,7 @@ logging.info("Game started")
 restarts = 0
 spaces = 0
 pauses = 0
-moves = [0,0,0,0]
+moves = [0]*4
 
 
 log_key = True
