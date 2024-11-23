@@ -3,6 +3,7 @@ import os
 import pygame
 import random
 import sys
+import time
 
 
 # https://github.com/pyGuru123/Python-Games/blob/master/Tetris
@@ -74,6 +75,8 @@ class Tetramino:
 	}
 
 	TYPES = ['I', 'Z', 'S', 'L', 'J', 'T', 'O']
+	COLORS = ["blue", "green", "pink", "red"]
+	rotated_count = 0
 
 	def __init__(self, x, y):
 		self.x = x
@@ -81,6 +84,7 @@ class Tetramino:
 		self.type = random.choice(self.TYPES)
 		self.shape = self.FIGURES[self.type]
 		self.color = random.randint(1, 4)
+		logging.info(f"Now {self.COLORS[self.color - 1]} {self.type} figure,")
 		self.rotation = 0
 
 	def image(self):
@@ -88,6 +92,7 @@ class Tetramino:
 
 	def rotate(self):
 		self.rotation = (self.rotation + 1) % len(self.shape)
+		self.rotated_count += 1
 
 class Tetris:
 	def __init__(self, rows, cols):
@@ -147,6 +152,7 @@ class Tetris:
 			for j in range(4):
 				if i * 4 + j in self.figure.image():
 					self.board[i + self.figure.y][j + self.figure.x] = self.figure.color
+		logging.info(f"Rotated {self.figure.rotated_count} times")
 		self.remove_line()
 		self.new_figure()
 		if self.intersects():
@@ -180,6 +186,7 @@ move_down = False
 can_move = True
 
 tetris = Tetris(ROWS, COLS)
+TIME_START = time.time()
 logging.info("Game started")
 
 restarts = 0
@@ -311,3 +318,4 @@ while running:
 pygame.quit()
 logging.info(f"{restarts} restarts")
 logging.info("Game finished")
+logging.info(f"Total time played: {time.time() - TIME_START:.2f} seconds")
