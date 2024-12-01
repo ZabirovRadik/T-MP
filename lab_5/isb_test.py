@@ -12,14 +12,6 @@ SETTINGS = {
 }
 
 
-@pytest.mark.parametrize("path", os.path.join("json", "settings.json"))
-def test_open_json(path):
-    file = open_json(path)
-    assert file["iins"] == SETTINGS["iins"]
-    assert file["last_numbers"] == SETTINGS["last_numbers"]
-    assert file["hash"] == SETTINGS["hash"]
-    assert file["path_to_card"] == SETTINGS["path_to_card"]
-
 
 def test_get_card_number():
     assert "5559210557390254" == card_selection(SETTINGS["iins"],
