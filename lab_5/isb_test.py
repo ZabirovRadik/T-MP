@@ -2,7 +2,6 @@ import os
 import pytest
 
 from isb.isb_4_lab import card_selection, algorithm_luhn
-from isb.auxiliary_operations import open_json,serialisation_card_num
 
 SETTINGS = {
     "iins":[510126, 555921, 519747],
