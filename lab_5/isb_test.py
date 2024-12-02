@@ -17,7 +17,6 @@ def test_get_card_number():
                                                 SETTINGS["last_numbers"],
                                                 SETTINGS["hash"],
                                                 SETTINGS["path_to_card"])
-    os.remove(SETTINGS["path_to_card"])
 
 
 @pytest.mark.parametrize(("card_numbers", "result"),
